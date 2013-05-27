@@ -1,0 +1,26 @@
+<device>
+	
+    <debug>
+        <verbose>1</verbose>
+        <!--  will overwrite packets values with sinewave (debug only)  -->
+        <sinewave>1</sinewave>
+    </debug>
+    
+	<properties>
+		<id>chambreEcho_001</id>
+		<nbLEDs>129</nbLEDs>
+		<length>4.0</length>
+	</properties>
+
+	<osc>
+		<port>1235</port>
+		<serverIP>127.0.0.1</serverIP>
+		<serverPort>1234</serverPort>
+	</osc>
+
+	<soundInput>
+		<deviceId>-1</deviceId>
+		<nbChannels>2</nbChannels>
+	</soundInput>
+
+</device>
