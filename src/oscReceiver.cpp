@@ -9,6 +9,7 @@
 #include "oscReceiver.h"
 #include "globals.h"
 #include "deviceEcho.h"
+#include "testApp.h"
 
 //--------------------------------------------------------------
 void oscReceiver::update()
@@ -44,6 +45,10 @@ void oscReceiver::update()
                         Globals::instance()->mp_deviceEcho->setEnableStandbyModeOSC( m_oscMessage.getArgAsInt32(indexArg)==1 ? true : false );
                     }
                 }
+				else if (m_oscMessage.getAddress() == OSC_ADDRESS_TURN_OFF)
+				{
+					ofExit();
+				}
             }
 
 /*

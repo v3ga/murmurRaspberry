@@ -3,7 +3,7 @@
     <debug>
         <verbose>1</verbose>
         <!--  will overwrite packets values with sinewave (debug only)  -->
-        <sinewave>1</sinewave>
+        <sinewave>0</sinewave>
     </debug>
     
 	<properties>
@@ -19,8 +19,8 @@
 	</osc>
 
 	<soundInput>
-		<deviceId>-1</deviceId>
-		<nbChannels>2</nbChannels>
+		<deviceId>0</deviceId>
+		<nbChannels>1</nbChannels>
 	</soundInput>
 
 </device>
