@@ -4,7 +4,6 @@
 
 #if MURMUR_HEADLESS
 #include "ofAppNoWindow.h"
-#include "ofNoWindowRunner.h"
 #endif
 
 
@@ -12,9 +11,13 @@
 int main()
 {
     #if MURMUR_HEADLESS
-        ofAppNoWindow window;
+/*        ofAppNoWindow window;
         window.setFrameRate(60);
         ofSetupNoWindow(&window, 1024, 768, OF_WINDOW);
+*/
+        ofAppNoWindow w;
+//        w.setFrameRate(60);
+        ofSetupOpenGL(&w,1024,768, OF_WINDOW);
     #else
         ofSetupOpenGL(1024,768, OF_WINDOW);			// <-------- setup the GL context
     #endif

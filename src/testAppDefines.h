@@ -8,6 +8,6 @@
 
 #pragma once
 
-#define MURMUR_HEADLESS 0
-#define MURMUR_USE_LEDS 0
+#define MURMUR_HEADLESS 1
+#define MURMUR_USE_LEDS 1
 

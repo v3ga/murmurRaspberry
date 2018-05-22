@@ -25,9 +25,24 @@ void oscReceiver::update()
                 if (m_oscMessage.getAddress() == OSC_ADDRESS_SET_DEVICE_PROP)
                 {
                     string propName = m_oscMessage.getArgAsString(indexArg++);
+                    if (propName == "mute")
+                    {
+                        Globals::instance()->mp_deviceEcho->setSoundInputMuteOSC( m_oscMessage.getArgAsInt32(indexArg)==1 ? true : false );
+                    }
+					else
+                    if (propName == "useRawVol")
+                    {
+                        Globals::instance()->mp_deviceEcho->setSoundInputUseRawVolumeOSC( m_oscMessage.getArgAsInt32(indexArg)==1 ? true : false );
+                    }
+					else
                     if (propName == "volMax")
                     {
                         Globals::instance()->mp_deviceEcho->setSoundInputVolumeMaxOSC( m_oscMessage.getArgAsFloat(indexArg) );
+                    }
+                    else
+                    if (propName == "volMaxMax")
+                    {
+                        Globals::instance()->mp_deviceEcho->setSoundInputVolumeMaxMaxOSC( m_oscMessage.getArgAsFloat(indexArg) );
                     }
                     else
                     if (propName == "volHistorySize")
@@ -40,15 +55,108 @@ void oscReceiver::update()
                         Globals::instance()->mp_deviceEcho->setSoundInputVolHistoryThOSC( m_oscMessage.getArgAsFloat(indexArg) );
                     }
                     else
+                    if (propName == "volHistoryPingTh")
+                    {
+                        Globals::instance()->mp_deviceEcho->setVolHistoryPingThOSC( m_oscMessage.getArgAsFloat(indexArg) );
+                    }
+                    else
+                    if (propName == "enablePitch")
+                    {
+                        Globals::instance()->mp_deviceEcho->setEnablePitchOSC( m_oscMessage.getArgAsInt32(indexArg)==1 ? true : false );
+                    }
+                    else
+                    if (propName == "pitchMin")
+                    {
+                        Globals::instance()->mp_deviceEcho->setSoundInputPitchMinOSC( m_oscMessage.getArgAsFloat(indexArg) );
+                    }
+                    else
+                    if (propName == "pitchMax")
+                    {
+                        Globals::instance()->mp_deviceEcho->setSoundInputPitchMaxOSC( m_oscMessage.getArgAsFloat(indexArg) );
+                    }
+                    else
                     if (propName == "enableStandbyMode")
                     {
                         Globals::instance()->mp_deviceEcho->setEnableStandbyModeOSC( m_oscMessage.getArgAsInt32(indexArg)==1 ? true : false );
                     }
+                    else
+                    if (propName == "enableStandbyMode")
+                    {
+                        Globals::instance()->mp_deviceEcho->setEnableStandbyModeOSC( m_oscMessage.getArgAsInt32(indexArg)==1 ? true : false );
+                    }
+                    else
+                    if (propName == "timeStandby")
+                    {
+                        //printf("timeStandby = %.3f - ", m_oscMessage.getArgAsFloat(indexArg));
+                        Globals::instance()->mp_deviceEcho->setTimeStandbyOSC( m_oscMessage.getArgAsFloat(indexArg) );
+                    }
+                    else
+                    if (propName == "sampleVolStandby")
+					{
+                        Globals::instance()->mp_deviceEcho->setSampleVolumeStandbyOSC( m_oscMessage.getArgAsFloat(indexArg) );
+					}
+                    else
+                    if (propName == "enableColor")
+					{
+						int value = m_oscMessage.getArgAsInt32(indexArg++);
+						Globals::instance()->mp_deviceEcho->enableColorOSC(value>0 ? true : false);
+					}
+                    else
+                    if (propName == "color")
+					{
+						float hue = m_oscMessage.getArgAsFloat(indexArg++);
+						float sat = m_oscMessage.getArgAsFloat(indexArg);
+                        Globals::instance()->mp_deviceEcho->setColorHueSaturationOSC(hue,sat);
+						
+						//ofLog()<<"(hue,sat)="<<ofToString(hue)<<","<<ofToString(sat);
+					}
+                    else
+                    if (propName == "color2")
+                    {
+                        float hue = m_oscMessage.getArgAsFloat(indexArg++);
+                        float sat = m_oscMessage.getArgAsFloat(indexArg);
+                        Globals::instance()->mp_deviceEcho->setColor2HueSaturationOSC(hue,sat);
+
+                        // ofLog() << "(hue,sat)=" << hue << ',' << sat;
+                    }
+					else
+					if (propName == "invertPacketsVolume")
+					{
+						int value = m_oscMessage.getArgAsInt32(indexArg++);
+						Globals::instance()->mp_deviceEcho->invertPacketsVolumeOSC(value>0 ? true : false);
+					}
+					else
+					if (propName == "reversePacketsDir")
+					{
+						int value = m_oscMessage.getArgAsInt32(indexArg++);
+						Globals::instance()->mp_deviceEcho->reversePacketsDirOSC(value>0 ? true : false);
+					}
+                    else
+                    if (propName == "bpmEnable")
+					{
+						int value = m_oscMessage.getArgAsInt32(indexArg++);
+						Globals::instance()->mp_deviceEcho->setBPMEnableOSC(value>0 ? true : false);
+					}
+                    else
+                    if (propName == "bpm")
+					{
+						int value = m_oscMessage.getArgAsInt32(indexArg++);
+						Globals::instance()->mp_deviceEcho->setBPMOSC(value);
+					}
                 }
-				else if (m_oscMessage.getAddress() == OSC_ADDRESS_TURN_OFF)
-				{
-					ofExit();
+                else if (m_oscMessage.getAddress() == OSC_ADDRESS_TURN_OFF)
+                {
+                    bool bReboot = m_oscMessage.getArgAsInt32(indexArg)==1 ? true : false;
+                    testApp::turnoff( bReboot );
+					// ofExit();
 				}
+			else
+			if (m_oscMessage.getAddress() == OSC_ADDRESS_RESET_PING)
+			{
+				Globals::instance()->mp_deviceEcho->resetVolHistoryPingOSC();
+			}
+				
+				
             }
 
 /*

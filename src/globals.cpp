@@ -9,7 +9,6 @@
 
 #include "globals.h"
 #include "testApp.h"
-#include "oscReceiver.h"
 #include "deviceEcho.h"
 
 Globals* Globals::smp_instance = 0;
@@ -27,4 +26,10 @@ Globals* Globals::instance(){
 	}
 	return smp_instance; 
 }
+
+//--------------------------------------------------------------
+void Globals::logMessageOSC(const ofxOscMessage& message, bool isIn)
+{
+}
+
 
