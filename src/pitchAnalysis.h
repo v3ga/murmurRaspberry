@@ -17,7 +17,7 @@ class pitchAnalysis
 		void				setConfidenceTh	(float th){m_confidenceTh=th;}
 		void				setClamp		(float min, float max){setMin(min);setMax(max);}
 		void				setMin			(float min){m_pitchMin = min;ofLog() << "pichMin=" << ofToString(min);}
-		void				setMax			(float max){m_pitchMax = max;ofLog() << "pichMin=" << ofToString(max);}
+		void				setMax			(float max){m_pitchMax = max;ofLog() << "pichMax=" << ofToString(max);}
 		void				setHistorySize	(float size);
 		int					getHistorySize	(){return m_historySize;}
 		float				getPitchNorm	(float value);
